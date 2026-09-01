@@ -55,7 +55,7 @@ app.use((err, _req, res, _next) => {
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`[SERVER] WEB-RAI API démarré sur http://localhost:${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`[SERVER] WEB-RAI API démarré sur 0.0.0.0:${PORT}`);
   });
 });
