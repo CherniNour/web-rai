@@ -1,0 +1,611 @@
+1/21 
+Projet Application WEB-RAI 
+ 
+Objectifs et Périmètre du Projet 
+Objectif Principal 
+Périmètre Fonctionnel 
+1. Gestion de l’inventaire 
+1.1. Structure des tables 
+1.2. Exigences fonctionnelles 
+1.3. Ecrans 
+2. Gestion de la Maintenance : 
+Journalisation des interventions et planification des contrôles périodiques. 
+2.1. Structure des tables 
+2.2. Exigences fonctionnelles 
+2.3. Ecrans 
+3. Gestion des ECME : 
+3.1. Structure des tables 
+3.2. Exigences fonctionnelles 
+4. Gestion des Outillages Spécifiques : 
+4.1. Gestion des Référentiels (Pince, Mors, Cosse, Fil). 
+4.1.1. Structure des tables 
+4.1.2. Exigences fonctionnelles 
+5. Enregistrement des Mesures de Contrôle Qualité (Journal) 
+5.1. Structure des tables 
+5.2. Exigences fonctionnelles 
+6. Gestion des dossiers de méthodes. 
+6.1. Structure des tables 
+6.2. Exigences fonctionnelles 
+7. Gestions des workflow de processus de fabrication. 
+7.1. Structure des tables 
+7.2. Exigences fonctionnelles 
+8. Gestion des indicateurs méthode-industrialisation 
+8.1. Structure des tables 
+8.2. Exigences fonctionnelles 
+9. Reporting et Rappels. 
+10. Exigences Non Fonctionnelles (ENF) 
+10.1. Sécurité et Accès 
+10.2. Technique et Performance 
+🔒11. Exigences Techniques et Non Fonctionnelles 
+ 
+
+=== PAGE BREAK ===
+
+2/21 
+Objectifs et Périmètre du Projet 
+ 
+ Objectif Principal 
+ 
+Développer une Application Web sécurisée et centralisée pour remplacer les 
+multiples fichiers Excel listés ci-dessous. L'objectif est de fournir une source unique 
+de vérité pour l'inventaire, le statut, la localisation, et l'historique de maintenance de 
+tous les équipements de production (Pinces, Applicateurs, Machines de coupe, Fers à 
+souder, etc.), la gestion et le suivi de ECME, les dossiers de méthodes,la gestion des 
+workflows de processus en y intégrant en y intégrant des ressources descriptives 
+(notes, pdf, vidéos…) ainsi que la gestions des indicateurs des processus méthode-
+industrialisation. 
+Nom de fichier Type 
+Suivi des equipments FQ030 Excel 
+Suivi temps d'arrêt FQ031 Excel 
+Suivi Préventive FQ024 Excel 
+Fiches de vie des ECME Excel 
+Etat des ECME-Validé Excel 
+PARAMETRE APP Excel 
+Suivi mesures de force 
+d'extraction des pinces 
+Excel 
+FQ060-01-REPERTOIRE DES 
+DOSSIERS METHODES (2) 
+Excel 
+Indicateurs du Processus 
+Méthode-Industrialisation 
+Excel 
+ 
+  
+
+=== PAGE BREAK ===
+
+3/21 
+ Périmètre Fonctionnel 
+ 
+L'application doit couvrir les fonctionnalités suivantes : 
+Gestion de l'Inventaire : Création et gestion de la liste complète de tous les 
+équipements. 
+Suivi du Statut et Localisation : Traçabilité en temps réel du statut (En service, Hors 
+service) et de la Zone de Production. 
+Gestion de la Maintenance : Journalisation des interventions et planification des 
+contrôles périodiques. 
+Gestion des Outillages Spécifiques : Module dédié aux Pinces et Applicateurs 
+(référentiels outillage). 
+Gestion des Référentiels (Pince, Mors, Cosse, Fil). 
+Définition des Règles de Sertissage (Configuration). 
+Enregistrement des Mesures de Contrôle Qualité (Journal) 
+Gestion des dossiers de méthodes. 
+Gestions des workflow de processus de fabrication. 
+Gestion des indicateurs méthode-industrialisation 
+Gestion des utilisateurs/opérateurs.. 
+Reporting et Rappels. 
+  
+
+=== PAGE BREAK ===
+
+4/21 
+ 
+1. Gestion de l’inventaire 
+1.1. Structure des tables 
+Table Rôle Champs Clés/Données 
+ZONES Référentiel des zones physiques de 
+production. 
+Id, 
+Nom_Zone (Bobinage, Coupe 
+Cable, Électronique), 
+Localisation 
+FABRICANTS Référentiel des fournisseurs 
+d'équipements. 
+Id 
+Nom 
+Pays 
+Contact 
+MODÈLES Référentiel des modèles 
+d’équipements 
+Id 
+Fabricant 
+Nom 
+Description 
+CATÉGORIES Référentiel des catégories 
+d’équipement (Bobinage, sertissage 
+…) 
+Id 
+Nom 
+Description 
+EQUIPEMENTS Inventaire général. (Basé sur Suivi 
+des equipments FQ030,Etat des 
+equipement) 
+Id 
+CODE_RAI 
+Désignation 
+Numéro Série 
+date acquisition 
+
+=== PAGE BREAK ===
+
+5/21 
+remarque 
+Statut 
+Zone 
+Fabricant 
+Modèle 
+Catégorie 
+ 
+1.2. Exigences fonctionnelles 
+ID Exigence Fonctionnelle Détails 
+EF-INV.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes:  
+ZONES  
+ FABRICANTS 
+MODÈLES 
+CATÉGORIES 
+EF-INV.02 Création d'Équipement Formulaire unique permettant 
+d'enregistrer un nouvel 
+équipement dans la table 
+ÉQUIPEMENTS avec toutes les 
+informations (RAI, Désignation, 
+N° Série, Fabricant, Zone..). 
+EF-INV.03 Liste des équipements Afficher la liste des équipements 
+et permettre la recherche et le tri  
+EF-INV.04 Sommaire équipements Traçabilité en temps réel du statut 
+(En service, Hors service) et de la 
+
+=== PAGE BREAK ===
+
+6/21 
+Zone de Production en affichant 
+un sommaire graphique par statut 
+et par zone  
+ 
+ 
+1.3. Ecrans 
+ 
+ 
+
+
+=== PAGE BREAK ===
+
+7/21 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE BREAK ===
+
+8/21 
+2. Gestion de la Maintenance :  
+Journalisation des interventions et planification des contrôles périodiques. 
+2.1. Structure des tables 
+Table Rôle Champs 
+Clés/Données 
+Tâches Tâches à effectuer pour chaque catégorie 
+de machine 
+Id 
+Catégorie 
+Description 
+Fréquence 
+Temps estimé 
+Interventions Journal des statuts et interventions. Id 
+Equipement 
+Numéro 
+type intervention 
+temps réel 
+technicien 
+remarque 
+temps_arret Suivi du temps d’arrêt machines Id 
+Technicien 
+Zone 
+Equipment 
+Semaine 
+Date 
+Heure demande 
+Heure début 
+
+=== PAGE BREAK ===
+
+9/21 
+Heure fin 
+Description 
+Temps d’arrêt 
+ 
+2.2. Exigences fonctionnelles 
+ID Exigence Fonctionnelle Détails 
+EF-MAI.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes de tâches de 
+maintenance à effectuer pour 
+chaque catégorie de machines 
+ainsi que la fréquence 
+d’exécution de tâche (mensuelle, 
+semestrielle) 
+EF-MAI.02 Interventions Formulaire unique permettant 
+d'enregistrer les interventions de 
+maintenance préventive . 
+EF-MAI.03 Calendrier Interventions Afficher le calendrier des 
+intervention par zone de 
+production 
+ 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+10/21 
+2.3. Ecrans 
+ 
+ 
+3. Gestion des ECME : 
+3.1. Structure des tables 
+ 
+Table Rôle Champs Clés/Données 
+ECME Référentiel des ECME Id, 
+Code ECME 
+Désignation 
+Marque 
+Modèle 
+Numéro de série 
+Date Achat 
+Date de mise en service 
+Propriété (RAI, Client) 
+Vérification(Interne, Externe) 
+
+
+=== PAGE BREAK ===
+
+11/21 
+Affectation 
+Date Affectation 
+Grandeur 
+Tolérance 
+eceme 
+vérification 
+ Id 
+ECME 
+Date vérification 
+Date prochaine vérification 
+Remarques 
+ 
+3.2. Exigences fonctionnelles 
+ID Exigence Fonctionnelle Détails 
+EF-ECM.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes de ECME 
+EF-ECM.02 Vérifications Formulaire unique permettant 
+d'enregistrer les vérification des  
+ECME . 
+EF-MAI.03 Etas des ECME Afficher l’état des EMCE 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+12/21 
+4. Gestion des Outillages Spécifiques :  
+ 
+Module dédié aux Pinces et Applicateurs (référentiels outillage). 
+4.1. Gestion des Référentiels (Pince, Mors, Cosse, 
+Fil). 
+4.1.1. Structure des tables 
+ 
+Table Rôle Champs Clés/Données 
+Pinces Référentiel des Pinces Id, 
+N° Pince 
+Mors Référentiel des Mors Id 
+Référence 
+MorsPositions Configuration Mors position More 
+Position 
+Cosses Référentiel des cosses Id 
+Référence 
+CossesFils Configuration Cosse/Fil Cosse 
+Fil 
+ 
+ 
+ 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+13/21 
+4.1.2. Exigences fonctionnelles 
+ID Exigence Fonctionnelle Détails 
+EF-OUT.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes : 
+Pinces 
+Mors 
+Cosses 
+Fils 
+ 
+EF-OUT.02 Configurations Formulaires permettant 
+d'enregistrer les configurations: 
+Mors Position 
+Cosse Fils 
+Pince Mors Position Cosse Fils 
+ 
+5. Enregistrement des Mesures de Contrôle Qualité 
+(Journal) 
+5.1. Structure des tables 
+ 
+Table Rôle Champs Clés/Données 
+PincesMesures Enregistrement mesures de force 
+d’extraction des pinces. 
+Date mesure 
+Pince 
+
+=== PAGE BREAK ===
+
+14/21 
+More 
+Position 
+Cosse 
+Fil 
+Tenue à la traction minimale 
+Valeur1 
+Valeur2 
+Valeur3 
+Valeur4 
+Valeur5 
+Valeur6 
+Prochaine date 
+ 
+5.2. Exigences fonctionnelles 
+ 
+ID Exigence Fonctionnelle Détails 
+EF-MES.02 Mesure de force 
+d’extraction des pinces. 
+ 
+Formulaires permettant 
+d'enregistrer les mesure de force 
+d’extraction des pinces en se 
+basant sur les configurations 
+enregistrés 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+15/21 
+6. Gestion des dossiers de méthodes. 
+6.1. Structure des tables 
+ 
+Table Rôle Champs Clés/Données 
+Clients Référentiel des Clients Id 
+Client 
+Types Produits Référentiel des Types de Produits Id 
+Déignation 
+Produits Référentiel des des Produits Id 
+Référence 
+Indice 
+Type Produit 
+Client 
+Lieux Classement Référentiel des Lieux de Classement Id 
+Lieu 
+Spécifications Référentiel des Spécifications Id, 
+Référence 
+Désignation 
+Indice 
+Date réception 
+Client 
+Lieu de classement 
+Nombre de copies 
+
+=== PAGE BREAK ===
+
+16/21 
+Dossiers 
+Fabrication 
+Référentiel des Dossiers de 
+Fabrication 
+Id 
+Réf Produit 
+Désignation 
+Client 
+Type Produit 
+Lieu de classement 
+Nombre de copies 
+ 
+6.2. Exigences fonctionnelles 
+ 
+ID Exigence Fonctionnelle Détails 
+EF-DOM.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes : 
+Produits 
+Lieux 
+Clients 
+Spécifications 
+Dossier méthodes 
+ 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+17/21 
+7. Gestions des workflow de processus de 
+fabrication. 
+7.1. Structure des tables 
+ 
+Table Rôle Champs Clés/Données 
+Outils Référentiel des Outils Id 
+Outil 
+Composants Référentiel des Composanst Id 
+Référence 
+Opérations Référentiel des des opérations Id 
+Equipement 
+Outils 
+Parametres 
+Ressouces 
+Fabrications Référentiel des Processus de 
+fabrication 
+Dossier 
+Produit 
+Indice 
+Opération 
+Ressources 
+ 
+ 
+ 
+ 
+ 
+ 
+
+=== PAGE BREAK ===
+
+18/21 
+7.2. Exigences fonctionnelles 
+ID Exigence Fonctionnelle Détails 
+EF-WOR.01 Gestion des Référentiels Permettre la gestion CRUD 
+(Créer, Lire, Modifier, Supprimer) 
+des listes : 
+Outils 
+Composants 
+Opérations 
+Fabrications 
+ 
+8. Gestion des indicateurs méthode-industrialisation 
+8.1. Structure des tables 
+ 
+ 
+8.2. Exigences fonctionnelles 
+ 
+9.  Reporting et Rappels. 
+  
+Élément UX Exigence 
+Synthèse Globale Afficher les indicateurs globaux de 
+performance (basé sur SOMMAIRE.csv) : 
+Nombre total d'équipements, Nombre 
+HORS SERVICE (NOK), et le % de 
+défaillance global. 
+
+=== PAGE BREAK ===
+
+19/21 
+Statut par Zone Un tableau/graphique affichant la 
+répartition du statut OK/NOK par Zone de 
+Production. 
+Alertes de Contrôle (Critique) Widget de haute priorité listant tous les 
+équipements dont la Date Prochaine 
+Vérification est échue ou arrive à 
+échéance dans les 30 jours (rappel 
+d'étalonnage/VGP). 
+Rapport Historique Rapport exportable listant les 
+changements de statut et les interventions 
+de maintenance sur une période donnée. 
+ 
+10. Exigences Non Fonctionnelles (ENF) 
+10.1. Sécurité et Accès 
+ 
+ID Exigence Non Fonctionnelle Détails 
+ENF-SEC.01 Authentification Système de connexion sécurisé 
+(login/mot de passe). 
+ENF-SEC.02 Gestion des Rôles Opérateur : Peut consulter l'inventaire 
+et mettre à jour le statut (seulement 
+passer EN SERVICE_ _HORS SERVICE). 
+Maintenance/Qualité : Droits 
+d'enregistrement des interventions et 
+de planification des contrôles. 
+Administrateur : Tous droits, y compris 
+la gestion des référentiels. 
+
+=== PAGE BREAK ===
+
+20/21 
+ 
+10.2. Technique et Performance 
+ 
+ID Exigence Non 
+Fonctionnelle 
+Détails 
+ENF-TECH.01 Accessibilité Mobile L'application doit être 
+entièrement responsive 
+et utilisable via des 
+tablettes ou smartphones 
+sur le terrain pour la 
+consultation et la mise à 
+jour des statuts. 
+ENF-TECH.02 Base de Données Utilisation d'un SGBD 
+relationnel (PostgreSQL, 
+MySQL, SQL Server) pour 
+l'intégrité des relations  
+ENF-TECH.03 Migration des Données Fournir un script 
+d'importation pour migrer 
+les données des fichiers 
+Excel existants dans la 
+nouvelle structure de base 
+de données. 
+ 
+ 
+ 
+🔒11. Exigences Techniques et Non Fonctionnelles 
+ 
+
+=== PAGE BREAK ===
+
+21/21 
+Catégorie Exigence Non 
+Fonctionnelle 
+Description 
+Technologie Architecture Web Application développée sur 
+un framework web 
+moderne (ex : 
+React/Vue/Angular pour le 
+Front-end, Python/Node.js 
+pour le Back-end). 
+Base de Données Relationnelle Utilisation d'une base de 
+données robuste (ex : 
+PostgreSQL, MySQL) pour 
+garantir l'intégrité des 
+relations. 
+Sécurité Authentification Système de connexion 
+sécurisé par utilisateur 
+(login/mot de passe) et 
+gestion des rôles (ex : 
+Opérateur peut saisir les 
+mesures ; Administrateur 
+peut modifier les règles et 
+les référentiels). 
+Performance Temps de Réponse Temps de chargement des 
+pages et d'enregistrement 
+des données inférieur à 3 
+secondes. 
+Accessibilité Mobile Responsive L'application doit être 
+utilisable sur tablette pour 
+une saisie directe sur la 
+ligne de production. 
+ 
